@@ -106,8 +106,14 @@ class InstallVenv(object):
             pass
 
     def pip_install(self, *args):
+        #self.run_command(['tools/with_venv.sh',
+        #                 'pip', 'install', '--upgrade'] + list(args),
+        #                 redirect_output=False)
         self.run_command(['tools/with_venv.sh',
-                         'pip', 'install', '--upgrade'] + list(args),
+                         'pip', 'install',
+                         #'--index-url=http://pypi.douban.com/simple/',
+                         '--download-cache=/root/openstack/pip-download-cache',
+                         '--use-mirror'] + list(args),
                          redirect_output=False)
 
     def install_dependencies(self):
